@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="BuildUserControls.Dice"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my="clr-namespace:BuildUserControls"
+             mc:Ignorable="d" IsEnabled="False" Height="42" Width="42">
+    <Grid Margin="0,0,0,0">
+        <Button Command="my:Dice.Start" Name="RollButton" Background="Transparent" Margin="0,0,0,0">
+            <Image  Name="DiceImage"  Source="/BuildUserControls;component/Images/dice-4.png" IsHitTestVisible="True" Margin="0,0,-2,-2"/>
+        </Button>
+    </Grid>
+</UserControl>

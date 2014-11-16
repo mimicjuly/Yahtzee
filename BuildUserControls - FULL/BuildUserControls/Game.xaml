@@ -1,0 +1,229 @@
+﻿<Window x:Class="BuildUserControls.Game"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:BuildUserControls"
+        Title="Game" Height="250" Width="400" WindowStyle="None" AllowsTransparency="True" >
+    <Window.Resources>
+        <Style x:Key="ContentControlStyle1" TargetType="{x:Type ContentControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ContentControl}">
+                        <Grid>
+                            <TextBlock Name="Highlight" Foreground="#FF93ACBD" Margin="0,1,0,0" Text="{TemplateBinding Content}" FontWeight="Bold" />
+                            <TextBlock Name="Shadow" Margin="0,3,0,0" Foreground="Black" Text="{TemplateBinding Content}"/>
+                            <ContentPresenter Margin="0,2,0,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style  TargetType="{x:Type Button}">
+
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"  CornerRadius="25" BorderThickness="1" 
+                              BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Opacity="{TemplateBinding Opacity}">
+                            <Border.Background>
+								<RadialGradientBrush>
+                                    <GradientStop Color="#FF0B3351" Offset="1"/>
+                                    <GradientStop Color="#FF166297" Offset="0.02"/>
+                                    <GradientStop Color="#FF144D74" Offset="0.36"/>
+                                    <GradientStop Color="#FF0D4468" Offset="0.58"/>
+                                    <GradientStop Color="#FF0B3A5B" Offset="0.89"/>
+                                    <GradientStop Color="#FF0B3C5D" Offset="0.8"/>
+                                    <GradientStop Color="#FF155A8A" Offset="0.15"/>
+                                    <GradientStop Color="#FF0B3655" Offset="1"/>
+                                    <GradientStop Color="#FF0B3756" Offset="1"/>
+                                    <GradientStop Color="#FF0B3757" Offset="0.97"/>
+                                    <GradientStop Color="#FF0B3859" Offset="0.94"/>
+                                    <GradientStop Color="#FF145581" Offset="0.22"/>
+                                    <GradientStop Color="#FF14517B" Offset="0.28"/>
+                                    <GradientStop Color="#FF124B71" Offset="0.41"/>
+                                    <GradientStop Color="#FF0E466B" Offset="0.54"/>
+                                    <GradientStop Color="#FF145886" Offset="0.18"/>
+                                </RadialGradientBrush>
+							</Border.Background>
+                            <ContentPresenter x:Name="ButtonContentPresenter"
+                            VerticalAlignment="Center"  
+                            HorizontalAlignment="Center"/>
+                        </Border>
+						<ControlTemplate.Triggers>
+						 <Trigger Property="IsMouseOver" Value="true">
+						<Trigger.EnterActions>
+						<BeginStoryboard x:Name="storyBtn" >
+						<Storyboard RepeatBehavior="Forever" >
+					<DoubleAnimation Storyboard.TargetProperty="Opacity"
+					 From="1" To="0.88" AutoReverse="True" Duration="0:0:0.6"/>
+					 </Storyboard>
+				  </BeginStoryboard>
+				  </Trigger.EnterActions>
+				  <Trigger.ExitActions>
+							<StopStoryboard BeginStoryboardName="storyBtn"/>
+						</Trigger.ExitActions>
+				  </Trigger>
+						</ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+			
+			
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Content" Value="Player's Name:"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0,2"/>
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="Width" Value="110"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Style.Resources>
+                <VisualBrush x:Key="HelpBrush" Opacity="0.4" Stretch="None" AlignmentX="Left" >
+                    <VisualBrush.Visual>
+                        <TextBlock FontStyle="Italic" Padding="2,0" Text="Type players name here" Background="Transparent"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Style.Resources>
+            <Style.Triggers>
+                <Trigger Property="IsKeyboardFocused" Value="false">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsKeyboardFocused" Value="false"></Condition>
+                        <Condition Property="Text" Value=""></Condition>
+                    </MultiTrigger.Conditions>					
+                    <Setter Property="Background" Value="{StaticResource HelpBrush}"/>					
+                <!--<MultiTrigger.EnterActions>
+					<ResumeStoryboard Storyboard.TargetName="start" BeginStoryboardName="storyBtn" />
+				</MultiTrigger.EnterActions>-->
+				</MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsKeyboardFocused" Value="true"></Condition>
+                        <Condition Property="Text" Value=""></Condition>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+
+                            <Border x:Name="border2"  CornerRadius="5" BorderThickness="0.4" 
+                              BorderBrush="Black" RenderTransformOrigin="0.5,0.5" Background="{TemplateBinding Background}">
+                            </Border>
+                            <ScrollViewer x:Name="PART_ContentHost"
+                          Padding="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Padding" Value="5,0"/>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
+        	<Setter Property="FlowDirection" Value="LeftToRight"/>
+        </Style>
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="Images/background2.png"/>
+    </Window.Background>
+	<Viewbox>
+    <Grid Name="grid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="171"/>
+            <ColumnDefinition Width="63"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Button  Name="plus" Grid.Column="2" Click="plus_Click" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Margin="4,3,0,2" Width="30" Height="30">
+            <TextBlock Width="18" TextAlignment="Center" Margin="0,-2.6" FontSize="20" Height="30">+</TextBlock>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Add Player</TextBlock>
+                        <TextBlock>Adds another player to the game.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Label  HorizontalAlignment="Right"  Grid.Row="2" VerticalAlignment="Center" Margin="0,5" />
+        <TextBox Grid.Row="2" Grid.Column="1" Name="text0" Margin="0,5" />
+        <Button  Content="Start" Name="start" Grid.Column="1" Click="start_Click" HorizontalAlignment="Right" Grid.Row="3" VerticalAlignment="Bottom" Width="55" Height="50" Margin="0,0,48,12" Grid.RowSpan="2" Grid.ColumnSpan="2" >
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock FontWeight="Bold">Start the game!</TextBlock>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button  Name="minus" IsEnabled="False" Grid.Column="2" Click="minus_Click" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Center" Margin="38,3,-4,2" Width="30" Height="30" TextOptions.TextHintingMode="Animated">
+            <TextBlock Width="18" TextAlignment="Center" Margin="0,-2.6" FontSize="20" Height="31">-</TextBlock>
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Remove Player</TextBlock>
+                        <TextBlock>Removes this player from the game.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button Name="exit" Click="exit_Click" Width="35" Height="35" Grid.Column="2" TextOptions.TextHintingMode="Animated" Margin="47,10,-23,45">
+            <TextBlock Width="18" TextAlignment="Center" FontSize="25" Margin="0,-3" Height="37">x</TextBlock>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock FontWeight="Bold">Exit Game</TextBlock>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <ContentControl Style="{DynamicResource ContentControlStyle1}" FontSize="35" Foreground="#FF043F66" Content="Players" Grid.Column="1" Margin="14,40,38,4" FontWeight="Bold"/>
+        <Button x:Name="Maxi" Click="maxi_Click" Width="35" Height="35" Grid.Column="1" TextOptions.TextHintingMode="Animated" Margin="170,13.853,29,46.146" Grid.ColumnSpan="2">
+        	<Button.ToolTip>
+        		<ToolTip>
+        			<TextBlock FontWeight="Bold"><Run Text="Minimize"/></TextBlock>
+        		</ToolTip>
+        	</Button.ToolTip>
+        	<Grid Name="abc" Background="Transparent" Height="25" Width="25" >
+        		<InkCanvas x:Name="normal" IsEnabled="False" Visibility="hidden" HorizontalAlignment="Left" Height="23.61"  VerticalAlignment="Top" Width="27.207" RenderTransformOrigin="0.562,0.789" Background="{x:Null}" Margin="1.123,1.707,-3.33,-0.317">
+        	<Rectangle Fill="Transparent" HorizontalAlignment="Left" Height="16" Margin="1.66,4.5,-28.34,-26.32" VerticalAlignment="Top" Width="18" Stroke="white"/>
+        	<Rectangle Fill="Transparent" HorizontalAlignment="Left" Height="4" Margin="2.297,4.775,-24.961,-6.221" Stroke="white" StrokeThickness="2.5" VerticalAlignment="Top" Width="16.5"/>
+        	<Path Data="M0.5,5.4574999 L0.5,0.5 27.34,0.5 27.34,21.32 24.9425,21.32" Fill="#00000000" HorizontalAlignment="Left" Height="16" Margin="3.89,2.393,-21.89,-18.393" Stretch="Fill" Stroke="white" VerticalAlignment="Top" Width="18" />
+        </InkCanvas>
+        <InkCanvas x:Name="maximize" IsEnabled="False" Visibility="Visible" HorizontalAlignment="Left" Height="22.32"  VerticalAlignment="Top" Width="26.015" RenderTransformOrigin="0.562,0.789" Background="{x:Null}" Margin="0.317,1.665,-1.332,0">
+        	<Rectangle Fill="Transparent" HorizontalAlignment="Left" Height="17.47" Margin="3,3,-21.947,-20.47" VerticalAlignment="Top" Width="18.947" Stroke="white"/>
+        	<Rectangle Fill="Transparent" HorizontalAlignment="Left" Height="3.286" Margin="3.637,3.275,-18.616,-3.561" Stroke="white" StrokeThickness="3" VerticalAlignment="Top" Width="17.979"/>
+        </InkCanvas>
+			</Grid>			
+	    </Button>
+        
+    </Grid>
+	</Viewbox>
+    
+</Window>

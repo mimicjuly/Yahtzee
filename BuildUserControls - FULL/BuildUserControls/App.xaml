@@ -1,0 +1,14 @@
+﻿<Application x:Class="BuildUserControls.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:my="clr-namespace:BuildUserControls"
+             StartupUri="YAHTZEE.xaml">
+    <Application.Resources>
+        
+
+    	<Color x:Key="backgroundTable">#FF640909</Color>
+    	<Color x:Key="Color1">#FF260303</Color>
+        
+
+    </Application.Resources>
+</Application>
